@@ -41,6 +41,12 @@
       		</p>
       		<p><%= book.getDescription().substring(0, 60) %>...</p>
       		<p><%= book.getUnitPrice() %>원</p>
+      		<p>
+      			<!-- 보조 기기(스크린 리더)에게 "이거 버튼처럼 동작하는 요소야" 라고 알려줌 -->
+						<a href="./book.jsp?id=<%= book.getBookId() %>" class="btn btn-secondary" role="button">
+							상세 정보 &raquo;
+						</a>      		
+      		</p>
       	</div>
       </div>
      	<%	
