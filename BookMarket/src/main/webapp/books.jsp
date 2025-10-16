@@ -17,12 +17,10 @@
 	<div class="container py-4">
 		<%@ include file="menu.jsp" %>
 
-    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">도서목록</h1>
-        <p class="col-md-8 fs-4">BookList</p>
-      </div>
-    </div>
+	 	<jsp:include page="title.jsp">
+    	<jsp:param value="도서목록" name="title"/>
+    	<jsp:param value="BookList" name="sub"/>
+    </jsp:include>
 
 		<%
 			List<Book> listOfBooks = bookDAO.getAllBooks();
