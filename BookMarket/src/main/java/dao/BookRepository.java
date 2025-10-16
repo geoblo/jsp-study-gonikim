@@ -36,7 +36,23 @@ public class BookRepository {
 		book3.setUnitsInStock(1000);
 		book3.setReleaseDate("2023/01/01");
 		book3.setFilename("ISBN1236.jpg");
+		
+		listOfBooks.add(book1);
+		listOfBooks.add(book2);
+		listOfBooks.add(book3);
 	}
+	
+	// 모든 도서 목록을 가져오는 메소드
+	public List<Book> getAllBooks() {
+		return listOfBooks;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
