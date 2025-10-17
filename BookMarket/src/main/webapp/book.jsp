@@ -1,9 +1,10 @@
+<%@page import="dao.BookRepository"%>
 <%@page import="dto.Book"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" />
+<%-- <jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" /> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,11 @@
 			String id = request.getParameter("id");
 			// BookRepository 클래스로 bookDAO라는 이름의 자바빈을 생성하고
 			// 도서 아이디를 이용하여 도서 정보 가져오기
-			Book book = bookDAO.getBookById(id);
+			// Book book = bookDAO.getBookById(id);
+			
+			// BookRepository 공유 객체로 변경
+			BookRepository dao = BookRepository.getInstance();
+			Book book = dao.getBookById(id);
 		%>
 
     <div class="row align-items-md-stretch">

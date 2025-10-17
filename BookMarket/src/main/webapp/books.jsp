@@ -1,9 +1,10 @@
+<%@page import="dao.BookRepository"%>
 <%@page import="dto.Book"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" />
+<%-- <jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" /> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,11 @@
     </jsp:include>
 
 		<%
-			List<Book> listOfBooks = bookDAO.getAllBooks();
+			// List<Book> listOfBooks = bookDAO.getAllBooks();
+		
+			// BookRepository 공유 객체로 변경
+			BookRepository dao = BookRepository.getInstance();
+			List<Book> listOfBooks = dao.getAllBooks();
 		%>
 
     <div class="row align-items-md-stretch text-center">
