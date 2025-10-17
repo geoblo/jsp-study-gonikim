@@ -52,9 +52,11 @@ public class BookRepository {
 		if (bookId == null) return null;
 		
 		for (Book book : listOfBooks) {
-			
+			if (book != null && bookId.equals(book.getBookId())) {
+				return book; // 찾으면 바로 반환
+			}
 		}
-		
+		return null;
 	}
 	
 	
