@@ -19,6 +19,14 @@ import java.io.IOException;
     maxFileSize = 1024 * 1024 * 10,        // 업로드 최대 파일 크기(10MB)
     maxRequestSize = 1024 * 1024 * 50      // 전체 요청 크기(50MB)
 )
+
+// 동작 구조 이해
+// Servlet 3.0 파일 업로드는 내부적으로 다음 순서로 처리됨
+// 1. 사용자가 <input type="file">로 파일을 업로드함
+// 2. 서버(Tomcat 등)는 multipart 요청을 파싱함
+// 3. 업로드된 파일을 일단 임시로 저장함 (<-- 이때 메모리 또는 디스크 중 한 곳에 저장)
+// 4. 이후 Part.write()를 호출하면 최종 위치로 복사
+// 참고로 3단계의 임시 저장 위치를 결정하는 기준이 바로 fileSizeThreshold
 public class Fileupload01ProcessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
