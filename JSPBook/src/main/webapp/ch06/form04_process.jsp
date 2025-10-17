@@ -21,18 +21,14 @@
 		String hobby2 = request.getParameter("hobby2");
 		String hobby3 = request.getParameter("hobby3");
 		String comment = request.getParameter("comment");
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 	%>
+	
+	<p>아이디: <%= id %></p>
+	<p>비밀번호: <%= passwd %></p>
+	<p>이름: <%= name %></p>
+	<p>연락처: <%= phone1 %>-<%= phone2 %>-<%= phone3 %></p>
+	<p>성별: <%= gender %></p>
+	<p>취미: <%= hobby1 %> <%= hobby2 %> <%= hobby3 %></p>
+	<p>가입인사: <%= comment %></p>
 </body>
 </html>
