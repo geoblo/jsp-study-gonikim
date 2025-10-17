@@ -7,7 +7,7 @@
 <title>Form Processing</title>
 </head>
 <body>
-	<!-- form 태그와 input 태그로 간단한 회원 가입 양식 만들기 -->
+	<!-- select 태그로 연락처 수정하기 -->
 	<h3>회원가입</h3>
 	<form action="#" name="member" method="post">
 		<p>
@@ -22,7 +22,13 @@
 		</p>
 		<p>
 			연락처: 
-			<input type="text" maxlength="4" size="4" name="phone1"> - 
+			<select name="phone1">
+				<option value="010">010</option>
+				<option value="011">011</option>
+				<option value="016">016</option>
+				<option value="017">017</option>
+				<option value="019">019</option>
+			</select> - 
 			<input type="text" maxlength="4" size="4" name="phone2"> - 
 			<input type="text" maxlength="4" size="4" name="phone3">
 		</p>
