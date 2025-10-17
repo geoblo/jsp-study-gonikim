@@ -62,7 +62,7 @@ public class Fileupload01ProcessServlet extends HttpServlet {
 		// 1. 업로드 경로 설정(2가지 경로 실습)
 		// getServletContext(): 현재 웹 애플리케이션의 환경 정보를 제공하는 컨텍스트 객체를 반환
 		// getRealPath("/"): 서버의 실제 디렉터리 위치의 "/" 루트 경로를 반환
-		// D:\gonikim\jsp\jsp-study-gonikim\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
+		// D:\gonikim\jsp\jsp-study-gonikim\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MyWebProject\
 		// String uploadPath = getServletContext().getRealPath("/upload");
 		// 웹 프로젝트 안(webapp 폴더 아래)에 폴더 생성
 		// 장점: 정적 리소스(예: 이미지)에 바로 접근 가능
