@@ -39,7 +39,9 @@
     <div class="row align-items-md-stretch">
     	<div class="col-md-5">
     		<!-- 웹 앱 내부 접근 시 -->
-    		<img alt="도서이미지" src="./resources/images/<%= book.getFilename() %>" style="width: 70%;">
+    		<%-- <img alt="도서이미지" src="./resources/images/<%= book.getFilename() %>" style="width: 70%;"> --%>
+    		<!-- 외부 폴더 접근 시 -->
+    		<img alt="도서이미지" src="<%= request.getContextPath() %>/images/<%= book.getFilename() %>" style="width: 70%;">
     	</div>
     
       <div class="col-md-6">
