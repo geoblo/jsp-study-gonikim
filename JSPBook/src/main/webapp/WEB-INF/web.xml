@@ -7,6 +7,14 @@
 	</error-page>
 	
 	<!-- 예외 유형으로 오류 페이지 호출하기 -->
+	<error-page>
+		<!-- 모든 예외 발생 시 -->
+		<!-- <exception-type>java.lang.Exception</exception-type> -->
+		<!-- 특정 예외 발생 시 -->
+		<exception-type>java.lang.ArithmeticException</exception-type>		
+		<location>/ch11/exceptionType_error.jsp</location>
+	</error-page>
+	
 	
 	
 	
