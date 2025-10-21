@@ -42,14 +42,18 @@
 		<url-pattern>/ch12/filter02_process.jsp</url-pattern>
 	</filter-mapping>
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	<filter>
+		<filter-name>Filter02_2</filter-name>
+		<filter-class>ch12.com.filter.LogFileFilter</filter-class>
+		<init-param>
+			<param-name>filename</param-name>
+			<param-value>d:\\logs\\monitor.log</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Filter02_2</filter-name>
+		<url-pattern>/ch12/filter02_process.jsp</url-pattern>
+	</filter-mapping>
 	
 	
 	
