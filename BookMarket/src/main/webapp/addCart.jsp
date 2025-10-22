@@ -55,29 +55,13 @@
 		if (!found) {
 			// 새 객체로 복사해서 추가(직접 참조 방지)
 			// 원본 데이터가 변경될 위험을 방지하기 위해 새 객체로 복사해서 장바구니에 넣는 것이 안전
-			
-			cartList.add(book);
+			Book cartItem = new Book(book);
+			cartItem.setQuantity(1);
+			cartList.add(cartItem);
 		}
 		
-		
-		
-		
-		
-		
 		// 5. 상세 페이지로 리다이렉트
-	
-		
+		response.sendRedirect("book.jsp?id=" + id);	
 	%>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
