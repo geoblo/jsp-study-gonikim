@@ -46,7 +46,7 @@
 		boolean found = false;
 		for (Book item : cartList) {
 			if (item.getBookId().equals(id)) {
-				item.setQuantity(item.getQuantity());
+				item.setQuantity(item.getQuantity() + 1);
 				found = true;
 				break;
 			}
