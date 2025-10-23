@@ -15,12 +15,12 @@
 <body>
 	<!-- 주문 정보 확인 페이지 작성하기 -->
 	<%
-		String Shipping_cartId = "";
-		String Shipping_name = "";
-		String Shipping_shippingDate = "";
-		String Shipping_country = "";
-		String Shipping_zipCode = "";
-		String Shipping_addressName	= "";
+		String shipping_cartId = "";
+		String shipping_name = "";
+		String shipping_shippingDate = "";
+		String shipping_country = "";
+		String shipping_zipCode = "";
+		String shipping_addressName	= "";
 		
 		// Quiz: 요청에 담긴 모든 쿠키 가져와서 변수에 저장하기
 		Cookie[] cookies = request.getCookies();
@@ -68,12 +68,12 @@
 			<div class="row justify-content-between">
 				<div class="col-4" align="left">
 					<strong>배송 주소</strong><br>
-					성명: <%=  %><br> 
-					우편번호: <%=	 %><br> 
-					주소: <%=  %>(<%=  %>)<br>
+					성명: <%= shipping_name %><br> 
+					우편번호: <%=	shipping_zipCode %><br> 
+					주소: <%= shipping_addressName %>(<%= shipping_country %>)<br>
 				</div>
 				<div class="col-4" align="right">
-					<p><em>배송일: <%=  %></em></p>
+					<p><em>배송일: <%= shipping_shippingDate %></em></p>
 				</div>
 			</div>
 			<div class=" py-5">
@@ -87,14 +87,22 @@
 					<%
 						// Quiz
 						// 세션에 저장된 장바구니 정보 가져오기
+						ArrayList<Book> cartList = (ArrayList<Book>) session.getAttribute("cartlist");
+					
+						if (cartList == null) {
+							cartList = new ArrayList<Book>();
+						}
 						
-						for () {
+						int sum = 0;
+						for (Book book : cartList) {
+							int total = book.getUnitPrice() * book.getQuantity();
+							sum += total;
 					%>
 					<tr>
-						<td class="text-center"><em><%=  %></em></td>
-						<td class="text-center"><%=  %></td>
-						<td class="text-center"><%=  %>원</td>
-						<td class="text-center"><%=  %>원</td>
+						<td class="text-center"><em><%= book.getName() %></em></td>
+						<td class="text-center"><%= book.getQuantity() %></td>
+						<td class="text-center"><%= book.getUnitPrice() %>원</td>
+						<td class="text-center"><%= total %>원</td>
 					</tr>
 					<%
 						} // 반복문 종료
@@ -103,7 +111,7 @@
 						<td></td>
 						<td></td>
 						<td class="text-right"><strong>총액: </strong></td>
-						<td class="text-center text-danger"><strong><%=  %></strong></td>
+						<td class="text-center text-danger"><strong><%= sum %></strong></td>
 					</tr>
 				</table>
 				<a href="" class="btn btn-secondary" role="button">이전</a>
