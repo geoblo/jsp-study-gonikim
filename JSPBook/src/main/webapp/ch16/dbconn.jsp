@@ -24,13 +24,8 @@
 			
 			// Connection 객체 얻기(JDBC 드라이버 -> DB 연결)
 			conn = DriverManager.getConnection(url, user, password);
-			out.println("데이터베이스 연결이 성공했습니다.");
 		} catch (SQLException e) {
-			out.println("데이터베이스 연결이 실패했습니다.<br>");
 			out.println("SQLException" + e.getMessage());
-		} finally {
-			if (conn != null) conn.close(); 
-			out.println("<br>데이터베이스 연결을 종료했습니다.");
 		}
 	%>
 </body>
