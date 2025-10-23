@@ -114,13 +114,10 @@
 						<td class="text-center text-danger"><strong><%= sum %></strong></td>
 					</tr>
 				</table>
-				<a href="" class="btn btn-secondary" role="button">이전</a>
-				<a href="" class="btn btn-success" role="button">주문 완료</a>
-				<a href="" class="btn btn-secondary"	role="button">취소</a>			
+				<a href="./shippingInfo.jsp?cartId=<%= shipping_cartId %>" class="btn btn-secondary" role="button">이전</a>
+				<a href="./thankCustomer.jsp" class="btn btn-success" role="button">주문 완료</a>
+				<a href="./checkOutCancelled.jsp" class="btn btn-secondary"	role="button">취소</a>			
 			</div>
-    	
-    
-    	
  		</div>
 
     <%@ include file="footer.jsp" %>
