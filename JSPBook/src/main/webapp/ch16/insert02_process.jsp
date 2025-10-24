@@ -17,13 +17,13 @@
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
 		String name = request.getParameter("name");
-		
+	
 		PreparedStatement pstmt = null;
 		
 		try {
 			String sql = "INSERT INTO member (id, passwd, name) VALUES (?, ?, ?)";
-		
-			pstmt = conn.prepareStatement(sql); // 동적인 쿼리에 사용하는 PreparedStatement 객체 생성
+			
+			pstmt = conn.prepareStatement(sql); // 동적인 쿼리에 사용하는 PreparedStatement 객체 생성(정적인 쿼리에도 권장)
 			pstmt.setString(1, id);
 			pstmt.setString(2, passwd);
 			pstmt.setString(3, name);
@@ -31,11 +31,11 @@
 			out.println("member 테이블 삽입이 성공했습니다.");
 		} catch (SQLException e) {
 			out.println("member 테이블 삽입이 실패했습니다.<br>");
-			out.println("SQLException: " + e.getMessage());			
+			out.println("SQLException: " + e.getMessage());
 		} finally {
 			if (pstmt != null) pstmt.close();
 			if (conn != null) conn.close();
 		}
-	%>	
+	%>
 </body>
 </html>
