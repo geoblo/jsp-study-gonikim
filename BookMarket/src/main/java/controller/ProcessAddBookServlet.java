@@ -7,9 +7,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import util.DBUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import dao.BookRepository;
 import dto.Book;
@@ -79,6 +82,7 @@ public class ProcessAddBookServlet extends HttpServlet {
         }
         
         // ==== Book 객체 생성 및 저장 ====
+        /*
         Book newBook = new Book();
         newBook.setBookId(bookId);
         newBook.setName(name);
@@ -95,6 +99,19 @@ public class ProcessAddBookServlet extends HttpServlet {
         
         BookRepository dao = BookRepository.getInstance();
         dao.addBook(newBook);
+		*/
+        
+        // 도서 등록 처리 DB 연동
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        
+        String sql = "";
+        
+        // 공통 메소드로 커넥션 획득
+        conn = DBUtil.getConnection();
+        
+        
+        
 		
 		// 등록 후 도서 목록 페이지로 리다이렉트
         response.sendRedirect("books.jsp");
