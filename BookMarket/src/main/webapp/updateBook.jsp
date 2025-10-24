@@ -41,7 +41,8 @@
     	</div>
     	
     	<div class="col-md-7">
-	    	<form name="newBook" action="processAddBook" method="post" enctype="multipart/form-data">
+	    	<form name="newBook" action="processUpdateBook" method="post" enctype="multipart/form-data">
+					<%-- <input type="hidden" name="oldFileName" value="<%= rs.getString("b_filename") %>"> --%>
 					<div class="mb-3 row">
 						<label class="col-sm-2">도서코드</label>
 						<div class="col-sm-3">
