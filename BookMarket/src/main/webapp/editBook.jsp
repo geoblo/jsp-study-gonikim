@@ -13,6 +13,14 @@
 	
 	<!-- 부트스트랩 연결 -->
 	<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+	
+	<script type="text/javascript">
+		function deleteConfirm(id) {
+			if (confirm('해당 도서를 삭제합니다!!')) {
+				location.href = './deleteBook.jsp?id=' + id;
+			}
+		}
+	</script>
 </head>
 <body>
 	<!-- 도서 편집 페이지 -->
