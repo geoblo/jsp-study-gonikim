@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>회원 가입</title>
+	<title>회원 수정</title>
 	
 	<!-- 부트스트랩 연결 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,14 +35,23 @@
 	</script>
 </head>
 <body>
+	<sql:setDataSource var="dataSource" 
+		url="jdbc:mysql://127.0.0.1:3306/bookmarketdb"
+		driver="com.mysql.cj.jdbc.Driver" user="root" password="test1234" />
+	
+	<sql:query var="resultSet" dataSource="${dataSource}">
+		SELECT * FROM member WHERE id = ?
+		<sql:param value="" />
+	</sql:query>
+
 	<div class="container py-4">
 		<!-- 헤더(메뉴) 영역 -->
 		<%@ include file="/menu.jsp" %>
 
 		<!-- 중간 타이틀 영역 -->
     <jsp:include page="/title.jsp">
-    	<jsp:param value="회원 가입" name="title"/>
-    	<jsp:param value="Membership Joining" name="sub"/>
+    	<jsp:param value="회원 수정" name="title"/>
+    	<jsp:param value="Membership Updating" name="sub"/>
     </jsp:include>
 
 		<!-- 본문 영역 -->
