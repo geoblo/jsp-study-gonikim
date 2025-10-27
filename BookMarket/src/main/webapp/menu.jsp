@@ -34,7 +34,7 @@
 				    	</li>
 		    		</c:when>
 		    		<c:otherwise>
-		    			<li style="padding-top: 7px">
+		    			<li style="padding-top: 7px;">
 		    				[${sessionScope.loginId}님]
 		    			</li>
 		    			<li class="nav-item">
