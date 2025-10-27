@@ -66,7 +66,7 @@
     
 			<!-- 본문 영역 -->
 	    <div class="row align-items-md-stretch">
-	    	<form name="newMember" action="processAddMember.jsp" method="post" onsubmit="checkForm(event)">
+	    	<form name="newMember" action="processUpdateMember.jsp" method="post" onsubmit="checkForm(event)">
 					<div class="mb-3 row">
 						<label class="col-sm-2">아이디</label>
 						<div class="col-sm-3">
