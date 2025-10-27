@@ -27,7 +27,7 @@
 				<h3 class="form-signin-heading">Please sign in</h3>
 				
 				<c:if test="${not empty param.error}">
-					<div class="alert alert-danger">아이디와 비밀번호를 확인해 주세요.	</div>
+					<div class="alert alert-danger">아이디와 비밀번호를 확인해 주세요.</div>
 				</c:if>
 				
   			<form class="form-signin" action="processLoginMember.jsp" method="post">
