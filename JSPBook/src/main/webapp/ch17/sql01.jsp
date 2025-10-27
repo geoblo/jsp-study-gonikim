@@ -24,10 +24,28 @@
 	
 	<table>
 		<tr>
-			<c:forEach var="columnName" >
-			
+			<!-- items: 자바의 for-each문과 같은 역할 -->
+			<c:forEach var="columnName" items="${resultSet.columnNames}">
+				<th style="width: 100px">
+					<c:out value="${columnName}" />
+				</th>
 			</c:forEach>
 		</tr>
+		
+		<c:forEach var="row" items="${resultSet.rowsByIndex}">
+			<tr>
+				<c:forEach var="column" items="${row}">
+					<td>
+						<c:if test="${column != null}">
+							<c:out value="${column}" />
+						</c:if>
+						<c:if test="${column == null}">
+							&nbsp;
+						</c:if>
+					</td>
+				</c:forEach>
+			</tr>
+		</c:forEach>
 	</table>
 	
 	<!-- JSTL SQL 태그의 Result 객체가 제공하는 프로퍼티
@@ -37,14 +55,5 @@
 		rowCount: 결과 행의 수
 		updateCount: 갱신된 행의 수(SELECT 아닐 경우) 
 	-->
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
