@@ -9,6 +9,28 @@
 	
 	<!-- 부트스트랩 연결 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<script type="text/javascript">
+		function checkForm(e) {
+			if (!document.newMember.id.value) {
+				alert("아이디를 입력하세요.");
+				e.preventDefault(); // 기본 동작 막기(여기서는 폼 제출 차단)
+				return;
+			}
+	
+			if (!document.newMember.password.value) {
+				alert("비밀번호를 입력하세요.");
+				e.preventDefault(); // 기본 동작 막기(여기서는 폼 제출 차단)
+				return;
+			}
+	
+			if (document.newMember.password.value !== document.newMember.password_confirm.value) {
+				alert("비밀번호를 동일하게 입력하세요.");
+				e.preventDefault(); // 기본 동작 막기(여기서는 폼 제출 차단)
+				return;
+			}
+		}
+	</script>
 </head>
 <body>
 	<div class="container py-4">
@@ -22,7 +44,7 @@
     </jsp:include>
 
 		<!-- 본문 영역 -->
-    <div class="row align-items-md-stretch text-center">
+    <div class="row align-items-md-stretch">
     	<form name="newMember" action="processAddMember.jsp" method="post" onsubmit="checkForm(event)">
 				<div class="mb-3 row">
 					<label class="col-sm-2">아이디</label>

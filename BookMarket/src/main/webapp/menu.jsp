@@ -23,14 +23,15 @@
 		    </a>
     
 		    <!-- 메뉴 추가 -->
+		    <!-- c:url 태그 사용 시 컨텍스트 경로(context path) 자동 포함(즉, 절대 경로를 써도 안전) -->
 		    <ul class="nav nav-pills">
 		    	<c:choose>
 		    		<c:when test="${empty sessionScope.loginId}">
 		    			<li class="nav-item">
-				    		<a href="/member/loginMember.jsp" class="nav-link">로그인</a>
+				    		<a href="<c:url value="/member/loginMember.jsp" />" class="nav-link">로그인</a>
 				    	</li>
 		    			<li class="nav-item">
-				    		<a href="/member/addMember.jsp" class="nav-link">회원 가입</a>
+				    		<a href="<c:url value="/member/addMember.jsp" />" class="nav-link">회원 가입</a>
 				    	</li>
 		    		</c:when>
 		    		<c:otherwise>
@@ -38,10 +39,10 @@
 		    				[${sessionScope.loginId}님]
 		    			</li>
 		    			<li class="nav-item">
-				    		<a href="/member/logoutMember.jsp" class="nav-link">로그아웃</a>
+				    		<a href="<c:url value="/member/logoutMember.jsp" />" class="nav-link">로그아웃</a>
 				    	</li>
 		    			<li class="nav-item">
-				    		<a href="/member/updateMember.jsp" class="nav-link">회원 수정</a>
+				    		<a href="<c:url value="/member/updateMember.jsp" />" class="nav-link">회원 수정</a>
 				    	</li>
 		    		</c:otherwise>
 		    	</c:choose>
