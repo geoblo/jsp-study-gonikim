@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,28 @@
     
 		    <!-- 메뉴 추가 -->
 		    <ul class="nav nav-pills">
+		    	<c:choose>
+		    		<c:when test="${empty sessionScope.loginId}">
+		    			<li class="nav-item">
+				    		<a href="/member/loginMember.jsp" class="nav-link">로그인</a>
+				    	</li>
+		    			<li class="nav-item">
+				    		<a href="/member/addMember.jsp" class="nav-link">회원 가입</a>
+				    	</li>
+		    		</c:when>
+		    		<c:otherwise>
+		    			<li style="padding-top: 7px">
+		    				[${sessionScope.loginId}님]
+		    			</li>
+		    			<li class="nav-item">
+				    		<a href="/member/logoutMember.jsp" class="nav-link">로그아웃</a>
+				    	</li>
+		    			<li class="nav-item">
+				    		<a href="/member/updateMember.jsp" class="nav-link">회원 수정</a>
+				    	</li>
+		    		</c:otherwise>
+		    	</c:choose>
+		    
 		    	<li class="nav-item">
 		    		<a href="./books.jsp" class="nav-link">도서 목록</a>
 		    	</li>
