@@ -31,7 +31,7 @@
 	
 	<!-- 1) 변수 참조 -->
 	${userName}           <!-- 스코프를 명시하지 않으면 pageScope/requestScope/sessionScope/applicationScope 순서로 검색 -->
-	${user.age}           <!-- user 객체의 age 속성 -->
+	${user.age}           <!-- user 객체의 age 속성(user.getAge()와 동일) -->
 	${user.address.city}  <!-- 중첩된 속성 접근 가능 -->
 	
 	<!-- 2) 컬렉션/맵 접근 -->
@@ -67,17 +67,5 @@
 		sessionScope: 세션 스코프 변수, 예: ${sessionScope.user.name}
 			=> 예: session.getAttribute("user").getName(); 과 동일
 	-->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
