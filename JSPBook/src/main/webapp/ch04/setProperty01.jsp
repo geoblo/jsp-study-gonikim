@@ -20,11 +20,5 @@
 	<!-- EL 표현 언어 -->
 	<p>아이디(EL 사용): ${person.id}</p>
 	<p>이름(EL 사용): ${person.name}</p>
-	
-	
-	
-	
-	
-	
 </body>
 </html>
