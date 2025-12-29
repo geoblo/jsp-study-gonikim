@@ -23,8 +23,5 @@
 	<!-- 테스트: 같은 요청 내에서 다른 JSP 실행 -->
 	<jsp:include page="useBean03.jsp" />
 	<!-- request가 유지되면 다른 페이지에서도 같은 person 객체를 재사용 가능 -->
-	
-	
-	
 </body>
 </html>
