@@ -41,6 +41,10 @@ public class BookRepository {
 		listOfBooks.add(book3);
 	}
 	
+	// 모든 도서 목록을 가져오는 메소드
+	public ArrayList<Book> getAllBooks() {
+		return listOfBooks;
+	}
 	
 	
 	
