@@ -55,7 +55,11 @@
 		dao.addBook(newBook);
 		
 		// books.jsp 페이지로 강제 이동하도록 작성
-		response.sendRedirect("books.jsp");
+		// response.sendRedirect("books.jsp");
+		
+		// forward 시 문제점 테스트
+		RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
+		dispatcher.forward(request, response);
 	%>
 </body>
 </html>

@@ -2,8 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- session이 연결되는 동안 도서 데이터를 공유하기 위해 사용 -->
-<%-- <jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" /> --%>
 <!DOCTYPE html>
 <html>
 <head>
