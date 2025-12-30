@@ -58,6 +58,10 @@ public class BookRepository {
 		return null; // 없으면 null 반환
 	}
 	
+	// 신규 도서 데이터를 저장하는 메소드
+	public void addBook(Book book) {
+		listOfBooks.add(book);
+	}
 	
 	
 	
