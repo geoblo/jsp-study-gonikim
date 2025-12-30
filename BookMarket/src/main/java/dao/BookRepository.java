@@ -8,6 +8,15 @@ import dto.Book;
 public class BookRepository {
 	private ArrayList<Book> listOfBooks = new ArrayList<>();
 	
+	// 기본 생성자에 대한 객체 변수 instance를 작성
+	private static BookRepository instance = new BookRepository();
+	
+	// 객체 변수 instance에 대한 Getter 메소드 작성
+	public static BookRepository getInstance() {
+		return instance;
+	}
+	// 목적: 객체를 하나만 만들어서 계속 공유해서 쓰겠다는 의미!
+	
 	public BookRepository() {
 		Book book1= new Book("ISBN1234", "C# 프로그래밍", 27000);
 		book1.setAuthor("우재남");
