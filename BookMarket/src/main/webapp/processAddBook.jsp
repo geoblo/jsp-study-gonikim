@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- 신규 도서 등록 처리 페이지 만들기 -->
-	<%
+	<%-- <%
 		String bookId = request.getParameter("bookId");
 		String name = request.getParameter("name");
 		String unitPrice = request.getParameter("unitPrice");
@@ -55,11 +55,32 @@
 		dao.addBook(newBook);
 		
 		// books.jsp 페이지로 강제 이동하도록 작성
-		// response.sendRedirect("books.jsp");
+		response.sendRedirect("books.jsp");
 		
 		// forward 시 문제점 테스트
-		RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
-		dispatcher.forward(request, response);
+		// RequestDispatcher dispatcher = request.getRequestDispatcher("books.jsp");
+		// dispatcher.forward(request, response);
+	%> --%>
+	
+	<!-- 자바빈 사용 시 -->
+	<jsp:useBean id="bookDTO" class="dto.Book" scope="request" />
+	
+	<%-- <jsp:setProperty name="bookDTO" property="*" /> --%>
+	<jsp:setProperty name="bookDTO" property="bookId" />
+	<jsp:setProperty name="bookDTO" property="name" />
+	<jsp:setProperty name="bookDTO" property="unitPrice" />
+	<jsp:setProperty name="bookDTO" property="author" />
+	<jsp:setProperty name="bookDTO" property="publisher" />
+	<jsp:setProperty name="bookDTO" property="releaseDate" />
+	<jsp:setProperty name="bookDTO" property="description" />
+	<jsp:setProperty name="bookDTO" property="category" />
+	<jsp:setProperty name="bookDTO" property="unitsInStock" />
+	<jsp:setProperty name="bookDTO" property="condition" />
+	
+	<%
+		BookRepository dao = BookRepository.getInstance();
+		dao.addBook(bookDTO);
+		response.sendRedirect("books.jsp");
 	%>
 </body>
 </html>
