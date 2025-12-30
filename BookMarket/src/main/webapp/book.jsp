@@ -1,0 +1,59 @@
+<%@page import="dto.Book"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- session이 연결되는 동안 도서 데이터를 공유하기 위해 사용 -->
+<jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session" />
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>도서 정보</title>
+	<!-- 부트스트랩 연결 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container py-4">
+		<%@ include file="menu.jsp" %>
+    
+    <jsp:include page="title.jsp">
+    	<jsp:param value="도서정보" name="title"/>
+    	<jsp:param value="BookInfo" name="sub"/>
+    </jsp:include>
+    
+    <%
+    	// Quiz
+    	// 도서 목록 페이지로부터 전달되는 도서 아이디를 가져오도록 작성
+    	
+    	// 도서 아이디를 이용하여 도서 정보 가져오기
+    	
+    %>
+    
+    <div class="row align-items-md-stretch">
+      <div class="col-md-12">
+      	<!-- Quiz: 도서 정보로 채워넣기(데이터 동적 바인딩) -->
+      	<h3><b>"책이름"</b></h3>
+				<p>"설명"</p>
+				<p>
+					<b>도서코드</b>: <span class="badge text-bg-danger">"책 ID"</span>
+				</p>							
+				<p>
+					<b>저자</b>: "저자"
+				</p>	
+				<p><b>출판사</b>: "출판사"</p>	
+				<p><b>출판일</b>: "출판일"</p>				
+				<p><b>분류</b>: "분류"</p>
+				<p><b>재고수</b>: "재고수"</p>
+				<h4>"가격" 원</h4>
+				<p>
+					<a href="#" class="btn btn-info">도서주문 &raquo;</a> 
+					<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				</p>
+      </div>
+ 		</div>
+ 		
+ 		<!-- 푸터(바닥글) 영역 -->
+   	<%@ include file="footer.jsp" %>
+	</div>
+</body>
+</html>
