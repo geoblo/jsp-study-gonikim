@@ -43,7 +43,15 @@ public class Fileupload01ProcessServlet extends HttpServlet {
 		// 1) (톰캣 서버 내 프로젝트) 내부 폴더(보통 학습용/테스트용)
 		// getServletContext(): 현재 웹 애플리케이션의 환경 정보를 제공하는 컨텍스트 객체를 반환
 		// getRealPath("/"): 서버의 실제 디렉터리 위치의 "/" 루트 경로를 반환
-		String uploadPath = getServletContext().getRealPath("/upload");
+//		String uploadPath = getServletContext().getRealPath("/upload");
+		
+		// 2) 외부 폴더(절대경로 사용 권장)
+		String uploadPath = "D:/upload";
+		
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdirs();
+		}
 		
 		// 2-1. 일반 데이터 가져오기
 		String name = request.getParameter("name");
