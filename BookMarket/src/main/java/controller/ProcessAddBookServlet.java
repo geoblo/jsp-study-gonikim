@@ -3,6 +3,8 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 
+import dao.BookRepository;
+import dto.Book;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -73,14 +75,24 @@ public class ProcessAddBookServlet extends HttpServlet {
 		}
 		
 		// Book 객체 생성 및 저장
+		Book newBook = new Book();
+		newBook.setBookId(bookId);
+		newBook.setName(name);
+		newBook.setUnitPrice(price);
+		newBook.setAuthor(author);
+		newBook.setPublisher(publisher);
+		newBook.setReleaseDate(releaseDate);
+		newBook.setDescription(description);
+		newBook.setCategory(category);
+		newBook.setUnitsInStock(stock);
+		newBook.setCondition(condition);
+		newBook.setFilename(fileName); // 이미지 이름 저장(상대 경로로 JSP 페이지에서 접근하기 위해)
 		
+		BookRepository dao = BookRepository.getInstance();
+		dao.addBook(newBook);
 		
 		// 등록 후 도서 목록 페이지로 리다이렉트
-		
-		
-		
-		
-		
+		response.sendRedirect("books.jsp");
 	}
 
 }

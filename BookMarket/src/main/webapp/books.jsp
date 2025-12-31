@@ -42,7 +42,9 @@
         <div class="h-100 p-2">
         	<!-- 도서 정보 -->
         	<!-- 웹앱 내부 폴더 사용 시 -->
-        	<img alt="도서이미지" src="./resources/images/<%= book.getFilename() %>" style="width: 250px; height: 350px;">
+        	<%-- <img alt="도서이미지" src="./resources/images/<%= book.getFilename() %>" style="width: 250px; height: 350px;"> --%>
+        	<!-- 외부 폴더 사용 시 -->
+        	<img alt="도서이미지" src="<%= request.getContextPath() %>/images/<%= book.getFilename() %>" style="width: 250px; height: 350px;">
         	
         	<h5><b><%= book.getName() %></b></h5>
         	<p>
