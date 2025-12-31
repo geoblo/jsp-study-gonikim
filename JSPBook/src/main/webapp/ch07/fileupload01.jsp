@@ -21,15 +21,5 @@
 		<p>파일: <input type="file" name="uploadFile"></p>
 		<button type="submit">파일 올리기</button>
 	</form>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
