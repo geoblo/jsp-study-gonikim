@@ -9,6 +9,8 @@
 	<title>도서 등록</title>
 	<!-- 부트스트랩 연결 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="./resources/js/validation.js"></script>
 </head>
 <body>
 	<div class="container py-4">
@@ -96,7 +98,7 @@
 								
 				<div class="mb-3 row">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">등록</button>
+						<button type="submit" class="btn btn-primary" onclick="checkAddBook(event)">등록</button>
 					</div>
 				</div>
     	</form>
@@ -105,5 +107,7 @@
  		<!-- 푸터(바닥글) 영역 -->
    	<%@ include file="footer.jsp" %>
 	</div>
+	
+	
 </body>
 </html>
