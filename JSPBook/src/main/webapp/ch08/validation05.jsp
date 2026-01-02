@@ -50,7 +50,21 @@
 			const regExpName = /^[가-힣]{2,4}$/; // 2~4글자
 			
 			// 전화번호 형태인지 검사
-			const regExpPhone = //;
+			const regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+			
+			// 이메일 형식인지 검사
+			const regExpEmail = 
+				/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			// i는 대소문자 무시
+			// ^[0-9a-zA-Z] : 첫 글자는 영숫자여야 함
+			// ([-_.]?[0-9a-zA-Z])* : - 또는 _ 또는 .가 있을 수도 있고 그 뒤에 영숫자가 와야 함
+			// @: 반드시 하나
+			// 도메인 부분도 동일한 패턴
+			// \.[a-zA-Z]{2,3} : 최상위 도메인은 점(.) + 알파벳 2~3글자
+			
+			// (참고) 더 간단하면서 널리 쓰이는 이메일 검증 패턴
+			const regExpEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+			
 			
 			if (!regExpId.test(id)) {
 				alert("아이디는 문자로 시작해주세요!");
@@ -67,10 +81,17 @@
 				return;
 			}
 			
+			if (!regExpPhone.test(phone)) {
+				alert("연락처 입력을 확인해주세요!");
+				return;
+			}
+			
+			if (!regExpEmail.test(email)) {
+				alert("이메일 입력을 확인해주세요!");
+				return;
+			}
+			
 			form.submit();
-			
-			
-			
 		}
 	</script>
 </body>
