@@ -7,8 +7,8 @@
 <title>Validation</title>
 </head>
 <body>
-	<!-- 폼 페이지에서 입력한 아이디와 비밀번호 값의 유무 검사하기 -->
-	<form name="loginForm" action="validation02_process.jsp" method="post">
+	<!-- 폼 페이지에서 입력한 비밀번호 값이 숫자인지 검사하기 -->
+	<form name="loginForm" action="validation04_process.jsp" method="post">
 		<p>아이디: <input type="text" name="id"></p>
 		<p>비밀번호: <input type="password" name="passwd"></p>
 		<button type="submit" onclick="checkLogin(event)">전송</button>
@@ -18,17 +18,18 @@
 		function checkLogin(e) {
 			const form = document.loginForm;
 			
-			if (form.id.value === '') {
-				alert("아이디를 입력해주세요.");
-				form.id.focus();
-				// return false; // 레거시 방식 - 비권장
-				e.preventDefault();
-				return;
+			for (let ch of form.id.value) {
+				if (ch < 'a' || ch > 'z') {
+					alert("아이디는 영문 소문자만 입력 가능합니다!");
+					form.id.select();
+					e.preventDefault();
+					return;
+				}				
 			}
 			
-			if (form.passwd.value === '') {
-				alert("비밀번호를 입력해주세요.");
-				form.passwd.focus();
+			if (isNaN(form.passwd.value)) {
+				alert("비밀번호는 숫자만 입력 가능합니다!");
+				form.passwd.select();
 				e.preventDefault();
 				return;
 			}
