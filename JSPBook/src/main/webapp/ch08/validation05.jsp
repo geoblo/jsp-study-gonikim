@@ -42,11 +42,28 @@
 			const regExpId = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]/;
 			
 			// 숫자만 최소 4자리 이상
-			const regExpPasswd = //;
+			// const regExpPasswd = /^[0-9]*$/; // *은 0번 이상 반복(빈 문자열도 허용)
+			const regExpPasswd = /^[0-9]{4,}$/; // 최소 자릿수 요구(4자리 이상)
 			
+			// 이름에 대해 한글만 검사
+			// const regExpName = /^[가-힣]+$/; // 최소 1글자 이상
+			const regExpName = /^[가-힣]{2,4}$/; // 2~4글자
+			
+			// 전화번호 형태인지 검사
+			const regExpPhone = //;
 			
 			if (!regExpId.test(id)) {
 				alert("아이디는 문자로 시작해주세요!");
+				return;
+			}
+			
+			if (!regExpPasswd.test(passwd)) {
+				alert("비밀번호는 숫자만 4자 이상 입력해주세요!");
+				return;
+			}
+			
+			if (!regExpName.test(name)) {
+				alert("이름은 한글만 2~4글자 입력해주세요!");
 				return;
 			}
 			
