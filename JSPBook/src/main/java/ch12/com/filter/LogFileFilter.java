@@ -3,6 +3,8 @@ package ch12.com.filter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -36,11 +38,28 @@ public class LogFileFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("LogFileFilter 수행...");
 		
+		writer.println("현재일시: " + getCurrentTime());
+		
+		String clientAddr = request.getRemoteAddr();
+		writer.println("클라이언트 주소: " + clientAddr);
+		
 		chain.doFilter(request, response);
+		
+		String contentType = response.getContentType();
+		writer.println("문서의 콘텐츠 유형: " + contentType);
+		writer.println("-------------------------------------------------------");
+		writer.flush();
+	}
+
+	private String getCurrentTime() {
+		LocalDateTime dateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		return dateTime.format(formatter);
 	}
 
 	public void destroy() {
 		System.out.println("LogFileFilter 해제...");
+		writer.close();
 	}
 
 }
