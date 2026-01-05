@@ -1,10 +1,4 @@
-package ch12.com.filter;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -12,14 +6,28 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpFilter;
+import jakarta.servlet.http.HttpServletRequest;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+// 필터 처리로 로그 기록 파일 만들기
+@WebFilter(
+	urlPatterns = {"/*"},
+	initParams = {
+		@WebInitParam(name = "filename", value = "d:\\logs\\bookmarket.log")
+	}
+)
 public class LogFileFilter extends HttpFilter implements Filter {
 	PrintWriter writer;
-       
+
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("LogFileFilter 초기화...");
-		
 		String filename = fConfig.getInitParameter("filename");
 		
 		if (filename == null) {
@@ -35,21 +43,29 @@ public class LogFileFilter extends HttpFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("LogFileFilter 수행...");
-		
-		writer.println("현재일시: " + getCurrentTime());
-		
-		String clientAddr = request.getRemoteAddr();
-		writer.println("클라이언트 주소: " + clientAddr);
+		long start = System.currentTimeMillis();
+		writer.println("접속한 클라이언트 IP: " + request.getRemoteAddr());
+		writer.println("접근한 URL 경로: " + getURLPath(request));
+		writer.println("요청 처리 시작 시각: " + getCurrentTime());
 		
 		chain.doFilter(request, response);
 		
-		String contentType = response.getContentType();
-		writer.println("문서의 콘텐츠 유형: " + contentType);
-		writer.println("-------------------------------------------------------");
+		long end = System.currentTimeMillis();
+		writer.println("요청 처리 종료 시각: " + getCurrentTime());
+		writer.println("요청 처리 소요 시간: " + (end - start) + "ms");
+		writer.println("=====================================================");
 		writer.flush();
 	}
-
+	
+	private String getURLPath(ServletRequest request) {
+		if (request instanceof HttpServletRequest req) {
+			String currentPath = req.getRequestURI();
+			String queryString = req.getQueryString();
+			return (queryString == null) ? currentPath : currentPath + "?" + queryString;
+		}
+		return "";
+	}
+	
 	private String getCurrentTime() {
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -57,7 +73,6 @@ public class LogFileFilter extends HttpFilter implements Filter {
 	}
 
 	public void destroy() {
-		System.out.println("LogFileFilter 해제...");
 		writer.close();
 	}
 
