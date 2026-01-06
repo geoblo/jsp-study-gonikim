@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="dto.Book"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,11 +24,32 @@
 		String shipping_addressName = "";
 		
 		// Quiz1: 요청에 담긴 모든 쿠키 가져와서 변수에 저장하기
+		Cookie[] cookies = request.getCookies();
 		
-		
-		
-		
-		
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				switch (cookie.getName()) {
+					case "Shipping_cartId":
+						shipping_cartId = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+					case "Shipping_name":
+						shipping_name = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+					case "Shipping_shippingDate":
+						shipping_shippingDate = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+					case "Shipping_country":
+						shipping_country = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+					case "Shipping_zipCode":
+						shipping_zipCode = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+					case "Shipping_addressName":
+						shipping_addressName = URLDecoder.decode(cookie.getValue(), "utf-8");
+						break;
+				}
+			}
+		}
 	%>
 
 	<div class="container py-4">
