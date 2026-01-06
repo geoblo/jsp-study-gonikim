@@ -52,18 +52,38 @@
     			<%
     				// Quiz
     				// 세션에 저장된 장바구니 정보 가져오기
+    				ArrayList<Book> cartList = (ArrayList<Book>) session.getAttribute("cartlist");
+    				if (cartList == null) { // 예외를 피하기 위해 빈 ArrayList 생성
+    					cartList = new ArrayList<Book>();
+    				}
     				
+    				// 장바구니에 담긴 도서 리스트 하나씩 출력하기
+    				int sum = 0;
+    				for (Book book : cartList) {
+    					int total = book.getUnitPrice() * book.getQuantity();
+    					sum += total;
+					%>
+					<tr>
+						<td><%= book.getBookId() %> - <%= book.getName() %></td>
+						<td><%= book.getUnitPrice() %></td>
+						<td><%= book.getQuantity() %></td>
+						<td><%= total %></td>
+						<td>
+							<a href="./removeCart.jsp?id=<%= book.getBookId() %>" class="badge text-bd-danger">삭제</a>
+						</td>						
+					</tr>
+					<%    				
+    				} // 반복문 종료
     			%>
-    			
     			<tr>
     				<th></th>
     				<th></th>
     				<th>총액</th>
-    				<th><%=  %></th>
+    				<th><%= sum %></th>
     				<th></th>
     			</tr>
     		</table>
-    	
+    		<a href="./books.jsp" class="btn btn-secondary">&laquo; 쇼핑 계속하기</a>
     	</div>
  		</div>
  		
