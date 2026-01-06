@@ -60,7 +60,7 @@
     	<jsp:param value="Order Info" name="sub"/>
     </jsp:include>
     
-    <div class="row align-items-md-stretch alert alert-info"">
+    <div class="row align-items-md-stretch alert alert-info">
     	<div class="text-center">
 				<h1>영수증</h1>
 			</div>
@@ -69,12 +69,12 @@
 			<div class="row justify-content-between">
 				<div class="col-4" align="left">
 					<strong>배송 주소</strong><br>
-					성명: <%=  %><br> 
-					우편번호: <%=	 %><br> 
-					주소: <%=  %>(<%=  %>)<br>
+					성명: <%= shipping_name %><br> 
+					우편번호: <%=	shipping_zipCode %><br> 
+					주소: <%= shipping_addressName %>(<%= shipping_country %>)<br>
 				</div>
 				<div class="col-4" align="right">
-					<p><em>배송일: <%=  %></em></p>
+					<p><em>배송일: <%= shipping_shippingDate %></em></p>
 				</div>
 			</div>
 			<div class=" py-5">
@@ -88,27 +88,34 @@
 					<%
 						// Quiz3
 						// 세션에 저장된 장바구니 정보 가져오기
-						
-						
-						
+						ArrayList<Book> cartList = (ArrayList<Book>) session.getAttribute("cartlist");
+    				if (cartList == null) { // 예외를 피하기 위해 빈 ArrayList 생성
+    					cartList = new ArrayList<Book>();
+    				}
+    				
+    				// 장바구니에 담긴 도서 리스트 하나씩 출력하기
+    				int sum = 0;
+    				for (Book book : cartList) {
+    					int total = book.getUnitPrice() * book.getQuantity();
+    					sum += total;
 					%>
 					<tr>
-						<td class="text-center"><em><%=  %></em></td>
-						<td class="text-center"><%=  %></td>
-						<td class="text-center"><%=  %>원</td>
-						<td class="text-center"><%=  %>원</td>
+						<td class="text-center"><em><%= book.getName() %></em></td>
+						<td class="text-center"><%= book.getQuantity() %></td>
+						<td class="text-center"><%= book.getUnitPrice() %>원</td>
+						<td class="text-center"><%= total %>원</td>
 					</tr>
 					<%
-						 // 반복문 종료
+    				} // 반복문 종료
 					%>
 					<tr>
 						<td></td>
 						<td></td>
 						<td class="text-right"><strong>총액: </strong></td>
-						<td class="text-center text-danger"><strong><%=  %></strong></td>
+						<td class="text-center text-danger"><strong><%= sum %></strong></td>
 					</tr>
 				</table>
-				<a href="./shippingInfo.jsp?cartId=<%=  %>" class="btn btn-secondary" role="button">이전</a>
+				<a href="./shippingInfo.jsp?cartId=<%= shipping_cartId %>" class="btn btn-secondary" role="button">이전</a>
 				<a href="./orderCompleted.jsp" class="btn btn-success" role="button">주문 완료</a>
 				<a href="./checkOutCancelled.jsp" class="btn btn-secondary"	role="button">취소</a>			
 			</div>
