@@ -12,7 +12,8 @@
 		Cookie[] cookies = request.getCookies();
 	
 		for (Cookie cookie : cookies) {
-			cookie.setMaxAge(0);
+			// cookie.setMaxAge(0); // 삭제
+			cookie.setMaxAge(10); // 유효 기간 설정			
 			response.addCookie(cookie);
 			// (중요) Domain, Path가 다르면 서로 다른 쿠키
 			
