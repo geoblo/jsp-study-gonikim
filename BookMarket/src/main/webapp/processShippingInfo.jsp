@@ -21,15 +21,24 @@
 		Cookie zipCode = new Cookie("Shipping_zipCode", URLEncoder.encode(request.getParameter("zipCode"), "utf-8"));
 		Cookie addressName = new Cookie("Shipping_addressName", URLEncoder.encode(request.getParameter("addressName"), "utf-8"));
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		// 유효기간 24시간으로 설정
+		cartId.setMaxAge(24 * 60 * 60);
+		name.setMaxAge(24 * 60 * 60);
+		shippingDate.setMaxAge(24 * 60 * 60);
+		country.setMaxAge(24 * 60 * 60);
+		zipCode.setMaxAge(24 * 60 * 60);
+		addressName.setMaxAge(24 * 60 * 60);
+		
+		// 응답에 쿠키 추가
+		response.addCookie(cartId);
+		response.addCookie(name);
+		response.addCookie(shippingDate);
+		response.addCookie(country);
+		response.addCookie(zipCode);
+		response.addCookie(addressName);
+		
+		// 주문 확인 페이지로 리다이렉트
+		response.sendRedirect("orderConfirmation.jsp");
 	
 	%>
 </body>
