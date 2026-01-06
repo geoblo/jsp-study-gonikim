@@ -25,7 +25,7 @@
     <div class="row align-items-md-stretch">
     	<form action="./processShippingInfo.jsp" method="post">
     		<!-- Quiz: 장바구니 아이디 값(cartId)을 숨겨서 전달하도록 작성 -->
-    		
+    		<input type="hidden" name="cartId" value="<%= request.getParameter("cartId") %>">
     		
     		<div class="mb-3 row">
 					<label class="col-sm-2">성명</label>
@@ -64,7 +64,13 @@
 				
 				<div class="mb-3 row">
 					<div class="col-sm-offset-2 col-sm-10">
-					
+						<a href="./cart.jsp?cartId=<%= request.getParameter("cartId") %>" class="btn btn-secondary" role="button">
+							이전
+						</a>
+						<button type="submit" class="btn btn-primary">등록</button>
+						<a href="./checkOutCancelled.jsp" class="btn btn-secondary" role="button">
+							취소
+						</a>
 					</div>
 				</div>
     	</form>
