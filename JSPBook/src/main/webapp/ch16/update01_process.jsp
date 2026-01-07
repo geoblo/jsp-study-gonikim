@@ -20,9 +20,27 @@
 		Statement stmt = null;
 		
 		try {
-			String sql = "";
+			String sql = "SELECT passwd FROM member WHERE id = '" + id + "'";
 			
 			stmt = conn.createStatement(); // 정적 쿼리에 사용하는 Statement 객체 생성
+			rs = stmt.executeQuery(sql);
+			
+			if (!rs.next()) {
+				out.println("member 테이블에 일치하는 아이디가 없습니다.");
+			} else {
+				String dbPasswd = rs.getString("passwd");
+				
+				// 사용자가 입력한 아이디와 비밀번호가 일치할 때만 이름을 수정
+				if (passwd.equals(dbPasswd)) {
+					sql = "UPDATE member SET name = '" + name + "' WHERE id = '" + id + "'";
+					
+					stmt = conn.createStatement();
+					stmt.executeUpdate(sql);
+					out.println("member 테이블을 수정했습니다.");
+				} else {
+					out.println("일치하는 비밀번호가 아닙니다.");
+				}
+			}
 		} catch (SQLException e) {
 			out.println("member 테이블 수정에 실패했습니다.<br>");
 			out.println("SQLException: " + e.getMessage());			
