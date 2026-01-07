@@ -31,12 +31,12 @@
     	<%
     		// Quiz: book 테이블의 모든 데이터를 가져오도록 SELECT문 작성
     		try {
-    			String sql = "";
-    			
+    			String sql = "SELECT * FROM book";
+    			pstmt = conn.prepareStatement(sql);
+    			rs = pstmt.executeQuery();
     			
     			// 가져온 레코드들을 반복하며 동적 바인딩
-    		 	while () {
-    		 	
+    		 	while (rs.next()) {
  		 	%>
       <div class="col-md-4">
         <div class="h-100 p-2">
@@ -44,18 +44,18 @@
         	<!-- 웹앱 내부 폴더 사용 시 -->
         	<%-- <img alt="도서이미지" src="./resources/images/<%= book.getFilename() %>" style="width: 250px; height: 350px;"> --%>
         	<!-- 외부 폴더 사용 시 -->
-        	<img alt="도서이미지" src="<%= request.getContextPath() %>/images/<%= book.getFilename() %>" style="width: 250px; height: 350px;">
+        	<img alt="도서이미지" src="<%= request.getContextPath() %>/images/<%= rs.getString("b_filename") %>" style="width: 250px; height: 350px;">
         	
-        	<h5><b><%= book.getName() %></b></h5>
+        	<h5><b><%= rs.getString("b_name") %></b></h5>
         	<p>
-        		<%= book.getAuthor() %>
+        		<%= rs.getString("b_author") %>
         		<br>
-        		<%= book.getPublisher() %> | <%= book.getReleaseDate() %>
+        		<%= rs.getString("b_publisher") %> | <%= rs.getString("b_releaseDate") %>
         	</p>
-        	<p><%= book.getDescription().substring(0, 60) %>...</p>
-        	<p><%= book.getUnitPrice() %>원</p>
+        	<p><%= rs.getString("b_description").substring(0, 60) %>...</p>
+        	<p><%= rs.getString("b_unitPrice") %>원</p>
         	<p>
-						<a href="./book.jsp?id=<%= book.getBookId() %>" class="btn btn-secondary" role="button">
+						<a href="./book.jsp?id=<%= rs.getString("b_id") %>" class="btn btn-secondary" role="button">
 							상세 정보 &raquo;
 						</a>
         	</p>
@@ -66,7 +66,9 @@
 				} catch (SQLException e) {
 					out.println("SQLException: " + e.getMessage());
 				} finally {
-					
+					if (rs != null) rs.close(); 
+					if (pstmt != null) pstmt.close(); 
+					if (conn != null) conn.close(); 
 				}
 			%>
  		</div>

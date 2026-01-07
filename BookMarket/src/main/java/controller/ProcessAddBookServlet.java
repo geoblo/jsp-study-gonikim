@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import dao.BookRepository;
 import dto.Book;
@@ -21,10 +23,6 @@ import jakarta.servlet.http.Part;
 public class ProcessAddBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ProcessAddBookServlet() {
-        super();
-    }
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
@@ -75,21 +73,26 @@ public class ProcessAddBookServlet extends HttpServlet {
 		}
 		
 		// Book 객체 생성 및 저장
-		Book newBook = new Book();
-		newBook.setBookId(bookId);
-		newBook.setName(name);
-		newBook.setUnitPrice(price);
-		newBook.setAuthor(author);
-		newBook.setPublisher(publisher);
-		newBook.setReleaseDate(releaseDate);
-		newBook.setDescription(description);
-		newBook.setCategory(category);
-		newBook.setUnitsInStock(stock);
-		newBook.setCondition(condition);
-		newBook.setFilename(fileName); // 이미지 이름 저장(상대 경로로 JSP 페이지에서 접근하기 위해)
+		/*
+		 * Book newBook = new Book(); newBook.setBookId(bookId); newBook.setName(name);
+		 * newBook.setUnitPrice(price); newBook.setAuthor(author);
+		 * newBook.setPublisher(publisher); newBook.setReleaseDate(releaseDate);
+		 * newBook.setDescription(description); newBook.setCategory(category);
+		 * newBook.setUnitsInStock(stock); newBook.setCondition(condition);
+		 * newBook.setFilename(fileName); // 이미지 이름 저장(상대 경로로 JSP 페이지에서 접근하기 위해)
+		 * 
+		 * BookRepository dao = BookRepository.getInstance(); dao.addBook(newBook);
+		 */
 		
-		BookRepository dao = BookRepository.getInstance();
-		dao.addBook(newBook);
+		// 도서 등록 처리 DB 연동
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		// Quiz
+		String sql = "INSERT INTO book (b_id, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate, b_condition, b_fileName)\r\n"
+				   + "VALUES ()";
+		
+		
 		
 		// 등록 후 도서 목록 페이지로 리다이렉트
 		response.sendRedirect("books.jsp");
