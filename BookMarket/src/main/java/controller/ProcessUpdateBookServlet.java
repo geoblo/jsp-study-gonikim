@@ -52,7 +52,7 @@ public class ProcessUpdateBookServlet extends HttpServlet {
 		
 		// 파일 업로드 처리
 		Part filePart = request.getPart("bookImage");
-		String fileName = "";
+		String fileName = null;
 		
 		if (filePart != null && filePart.getSize() > 0) {
 			// 파일 이름 가져오기
@@ -80,31 +80,13 @@ public class ProcessUpdateBookServlet extends HttpServlet {
 		
 		// Quiz
 		String sql = "UPDATE book "
-     		   + "SET b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, "
-     		   + "b_publisher = ?, b_category = ?, b_unitsInStock = ?, "
-     		   + "b_releaseDate = ?, b_condition = ?, b_fileName = IFNULL(?, b_fileName) "
-     		   + "WHERE b_id = ?";
-		
-//		try {
-//			conn = DBUtil.getConnection();
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, bookId);
-//			pstmt.setString(2, name);
-//			pstmt.setInt(3, price);
-//			pstmt.setString(4, author);
-//			pstmt.setString(5, description);
-//			pstmt.setString(6, publisher);
-//			pstmt.setString(7, category);
-//			pstmt.setLong(8, stock);
-//			pstmt.setString(9, releaseDate);
-//			pstmt.setString(10, condition);
-//			pstmt.setString(11, fileName);
-//			pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			DBUtil.close(pstmt, conn);
-//		}
+	     		   + "SET b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, "
+	     		   + "b_publisher = ?, b_category = ?, b_unitsInStock = ?, "
+	     		   + "b_releaseDate = ?, b_condition = ?, b_fileName = IFNULL(?, b_fileName) "
+	     		   + "WHERE b_id = ?";
+		// (참고) IFNULL(표현식1, 표현식2)
+		// 표현식1: NULL인지 아닌지 검사할 컬럼이나 값
+		// 표현식2: 표현식1이 NULL일 경우 대신 반환할 값
 		
 		// try-with-resources 적용
 		try (Connection conn = DBUtil.getConnection();
@@ -125,8 +107,8 @@ public class ProcessUpdateBookServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// 등록 후 도서 목록 페이지로 리다이렉트
-		response.sendRedirect("books.jsp");
+		// 수정 후 도서 편집 페이지로 리다이렉트
+		response.sendRedirect("editBook.jsp?edit=update");
 	}
 
 }
