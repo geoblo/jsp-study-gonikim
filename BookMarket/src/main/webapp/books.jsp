@@ -1,3 +1,4 @@
+<%@page import="java.sql.SQLException"%>
 <%@page import="dao.BookRepository"%>
 <%@page import="dto.Book"%>
 <%@page import="java.util.ArrayList"%>
@@ -24,20 +25,19 @@
     	<jsp:param value="BookList" name="sub"/>
     </jsp:include>
     
-    <%
-    	// ArrayList<Book> listOfBooks = bookDAO.getAllBooks();
-    	// BookRepository 공유 객체로 변경
-    	// 왜? 자바빈을 쓰면 해당 객체가 scope 내에 존재하면 재사용하고
-    	// 존재하지 않으면 새롭게 생성하기 때문에 객체 내 데이터가 불일치가 발생
-    	BookRepository dao = BookRepository.getInstance();
-    	ArrayList<Book> listOfBooks = dao.getAllBooks();
-    %>
+    <%@ include file="dbconn.jsp" %>
     
     <div class="row align-items-md-stretch text-center">
     	<%
-    		for (int i = 0; i < listOfBooks.size(); i++) {
-    			Book book = listOfBooks.get(i);
-    	%>
+    		// Quiz: book 테이블의 모든 데이터를 가져오도록 SELECT문 작성
+    		try {
+    			String sql = "";
+    			
+    			
+    			// 가져온 레코드들을 반복하며 동적 바인딩
+    		 	while () {
+    		 	
+ 		 	%>
       <div class="col-md-4">
         <div class="h-100 p-2">
         	<!-- 도서 정보 -->
@@ -62,11 +62,15 @@
         </div>
       </div>
       <%
-    		} // 반복문 종료
-      %>
+				 	} // 반복문 종료
+				} catch (SQLException e) {
+					out.println("SQLException: " + e.getMessage());
+				} finally {
+					
+				}
+			%>
  		</div>
  		
- 		<!-- 푸터(바닥글) 영역 -->
    	<%@ include file="footer.jsp" %>
 	</div>
 </body>
