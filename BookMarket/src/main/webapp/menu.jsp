@@ -3,6 +3,11 @@
 
 <!-- 헤더(메뉴) 영역 -->
 <header class="pb-3 mb-4 border-bottom">
+	<div class="container">
+		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+		</div>
+	</div>
+
   <a href="./welcome.jsp" class="d-flex align-items-center text-dark text-decoration-none">
   	<!-- 홈 아이콘 -->
    	<svg width="32" height="32" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
