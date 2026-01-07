@@ -10,6 +10,14 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- 로컬에서 직접 넣기 -->
 	<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"> -->
+	
+	<script type="text/javascript">
+		function deleteConfirm(id) {
+			if (confirm('해당 도서를 삭제합니다!!')) {
+				location.href = './deleteBook.jsp?id=' + id;
+			}
+		}
+	</script>
 </head>
 <body>
 	<!-- 도서 편집 페이지 -->
