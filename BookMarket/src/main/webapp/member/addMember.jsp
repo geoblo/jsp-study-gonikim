@@ -16,8 +16,8 @@
 		<%@ include file="../menu.jsp" %>
     
     <jsp:include page="/title.jsp">
-    	<jsp:param value="도서정보" name="title"/>
-    	<jsp:param value="BookInfo" name="sub"/>
+    	<jsp:param value="회원 가입" name="title"/>
+    	<jsp:param value="Member Join" name="sub"/>
     </jsp:include>
     
     <div class="row align-items-md-stretch">
