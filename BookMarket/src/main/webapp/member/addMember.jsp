@@ -68,7 +68,7 @@
 				<div class="mb-3 row">
 					<label class="col-sm-2">성별</label>
 					<div class="col-sm-2">
-						<input name="gender" type="radio" value="남"> 남 
+						<input name="gender" type="radio" value="남" checked> 남 
 						<input name="gender" type="radio" value="여"> 여
 					</div>
 				</div>
