@@ -16,14 +16,22 @@
 		password="mysql1234"
 	/>
 	
-	<sql:update >
-		
-		
-		
+	<sql:update var="result" dataSource="${dataSource}">
+		INSERT INTO member (id, password, name, gender, birth, mail, phone, address, regist_day) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+		<sql:param value="${param.id}" />
+		<sql:param value="${param.password}" />
+		<sql:param value="${param.name}" />
+		<sql:param value="${param.gender}" />
+		<sql:param value="${param.birthyy}/${param.birthmm}/${param.birthdd}" />
+		<sql:param value="${param.mail1}@${param.mail2}" />
+		<sql:param value="${param.phone}" />
+		<sql:param value="${param.address}" />
 	</sql:update>
 	
-	
-	
+	<c:if test="${result >= 1}">
+		<c:redirect url="resultMember.jsp?msg=1" /> <!-- msg=1은 회원 가입 완료를 의미 -->
+	</c:if>
 	
 </body>
 </html>
