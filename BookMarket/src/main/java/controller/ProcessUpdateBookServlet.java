@@ -75,9 +75,6 @@ public class ProcessUpdateBookServlet extends HttpServlet {
 		}
 		
 		// 도서 수정 처리 DB 연동
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-		
 		// Quiz
 		String sql = "UPDATE book "
 	     		   + "SET b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, "
@@ -91,17 +88,17 @@ public class ProcessUpdateBookServlet extends HttpServlet {
 		// try-with-resources 적용
 		try (Connection conn = DBUtil.getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, bookId);
-			pstmt.setString(2, name);
-			pstmt.setInt(3, price);
-			pstmt.setString(4, author);
-			pstmt.setString(5, description);
-			pstmt.setString(6, publisher);
-			pstmt.setString(7, category);
-			pstmt.setLong(8, stock);
-			pstmt.setString(9, releaseDate);
-			pstmt.setString(10, condition);
-			pstmt.setString(11, fileName);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, price);
+			pstmt.setString(3, author);
+			pstmt.setString(4, description);
+			pstmt.setString(5, publisher);
+			pstmt.setString(6, category);
+			pstmt.setLong(7, stock);
+			pstmt.setString(8, releaseDate);
+			pstmt.setString(9, condition);
+			pstmt.setString(10, fileName);
+			pstmt.setString(11, bookId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
