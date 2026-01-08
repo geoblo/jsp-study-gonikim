@@ -44,7 +44,7 @@
 					</c:otherwise>
 				</c:choose>
 			
-			
+				<!-- (중요) 공통 레이아웃(헤더나 메뉴)의 경우 위치에 따라 링크가 깨지는 구조이므로 절대 경로로 수정 -->
 				<li class="nav-item">
 					<a href="./books.jsp" class="nav-link">도서 목록</a>
 				</li>
