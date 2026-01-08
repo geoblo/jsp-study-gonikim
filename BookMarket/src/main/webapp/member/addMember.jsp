@@ -4,11 +4,30 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>도서 정보</title>
+	<title>회원 가입</title>
 	<!-- 부트스트랩 연결 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	<script type="text/javascript">
+		function checkForm(e) {
+			if (!document.newMember.id.value) {
+				alert("아이디를 입력하세요.");
+				e.preventDefault();
+				return;
+			}
+			
+			if (!document.newMember.password.value) {
+				alert("비밀번호를 입력하세요.");
+				e.preventDefault();
+				return;
+			}
+			
+			if (document.newMember.password.value !== document.newMember.password_confirm.value) {
+				alert("비밀번호를 동일하게 입력하세요.");
+				e.preventDefault();
+				return;
+			}
+		}
 	</script>
 </head>
 <body>
