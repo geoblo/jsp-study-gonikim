@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>도서 등록</title>
+	<title>장바구니 삭제</title>
 </head>
 <body>
 	<!-- 장바구니에 등록된 전체 도서 삭제 처리하는 페이지 만들기 -->
