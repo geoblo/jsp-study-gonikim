@@ -20,7 +20,6 @@
 		UPDATE member 
 		SET password = ?, name = ?, gender = ?, birth = ?, mail = ?, phone = ?, address = ? 
 		WHERE id = ?
-		<sql:param value="${param.id}" />
 		<sql:param value="${param.password}" />
 		<sql:param value="${param.name}" />
 		<sql:param value="${param.gender}" />
@@ -28,11 +27,11 @@
 		<sql:param value="${param.mail1}@${param.mail2}" />
 		<sql:param value="${param.phone}" />
 		<sql:param value="${param.address}" />
+		<sql:param value="${param.id}" />
 	</sql:update>
 	
 	<c:if test="${result >= 1}">
-		<c:redirect url="resultMember.jsp?msg=1" /> <!-- msg=1은 회원 가입 완료를 의미 -->
+		<c:redirect url="resultMember.jsp?msg=0" /> <!-- msg=0은 회원 정보 수정 완료를 의미 -->
 	</c:if>
-	
 </body>
 </html>
