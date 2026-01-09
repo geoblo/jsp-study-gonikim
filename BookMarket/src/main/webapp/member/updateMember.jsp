@@ -35,6 +35,18 @@
 	</script>
 </head>
 <body>
+	<sql:setDataSource var="dataSource"
+		driver="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/bookmarketdb"
+		user="root"
+		password="mysql1234"
+	/>
+	
+	<sql:query var="resultSet" dataSource="${dataSource}">
+		SELECT * FROM member WHERE id = ?
+		<sql:param value="${sessionScope.loginId}" />
+	</sql:query>
+
 	<div class="container py-4">
 		<%@ include file="../menu.jsp" %>
     
@@ -43,107 +55,118 @@
     	<jsp:param value="Member Update" name="sub"/>
     </jsp:include>
     
-    <div class="row align-items-md-stretch">
-    	<form name="newMember" action="./processUpdateMember.jsp" method="post" onsubmit="checkForm(event)">
-				<div class="mb-3 row">
-					<label class="col-sm-2">아이디</label>
-					<div class="col-sm-3">
-						<input name="id" type="text" class="form-control" placeholder="id">
+    <c:if test="${not empty resultSet.rows}"> <!-- 가져온 회원 정보가 존재한다면 -->
+    	<c:set var="row" value="${resultSet.rows[0]}" />
+    	<c:set var="mailParts" value="${fn:split(row.mail, '@')}" />
+    	<c:set var="mail1" value="${mailParts[0]}" />
+    	<c:set var="mail2" value="${mailParts[1]}" />
+    	<c:set var="birthParts" value="${fn:split(row.birth, '/')}" />
+    	<c:set var="year" value="${birthParts[0]}" />
+    	<c:set var="month" value="${birthParts[1]}" />
+    	<c:set var="day" value="${birthParts[2]}" />
+    
+    	<div class="row align-items-md-stretch">
+	    	<form name="newMember" action="./processUpdateMember.jsp" method="post" onsubmit="checkForm(event)">
+					<div class="mb-3 row">
+						<label class="col-sm-2">아이디</label>
+						<div class="col-sm-3">
+							<input name="id" type="text" class="form-control" placeholder="id" value="${row.id}" readonly>
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">비밀번호</label>
-					<div class="col-sm-3">
-						<input name="password" type="password" class="form-control" placeholder="password">
+					<div class="mb-3 row">
+						<label class="col-sm-2">비밀번호</label>
+						<div class="col-sm-3">
+							<input name="password" type="password" class="form-control" placeholder="password" value="${row.password}">
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">비밀번호 확인</label>
-					<div class="col-sm-3">
-						<input name="password_confirm" type="password" class="form-control" placeholder="password confirm">
+					<div class="mb-3 row">
+						<label class="col-sm-2">비밀번호 확인</label>
+						<div class="col-sm-3">
+							<input name="password_confirm" type="password" class="form-control" placeholder="password confirm">
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">성명</label>
-					<div class="col-sm-3">
-						<input name="name" type="text" class="form-control" placeholder="name">
+					<div class="mb-3 row">
+						<label class="col-sm-2">성명</label>
+						<div class="col-sm-3">
+							<input name="name" type="text" class="form-control" placeholder="name" value="${row.name}">
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">성별</label>
-					<div class="col-sm-2">
-						<input name="gender" type="radio" value="남" checked> 남 
-						<input name="gender" type="radio" value="여"> 여
+					<div class="mb-3 row">
+						<label class="col-sm-2">성별</label>
+						<div class="col-sm-2">
+							<input name="gender" type="radio" value="남" ${row.gender eq "남" ? "checked" : ""}> 남 
+							<input name="gender" type="radio" value="여" ${row.gender eq "여" ? "checked" : ""}> 여
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">생일</label>
-					<div class="col-sm-10">
-					  <div class="row">
-					  	<div class="col-sm-2">
-								<input type="text" name="birthyy" maxlength="4" class="form-control" placeholder="년(4자)" size="6"> 
-							</div>
-							<div class="col-sm-2">
-								<select name="birthmm" class="form-select">
-									<option value="">월</option>
-									<option value="01">1</option>
-									<option value="02">2</option>
-									<option value="03">3</option>
-									<option value="04">4</option>
-									<option value="05">5</option>
-									<option value="06">6</option>
-									<option value="07">7</option>
-									<option value="08">8</option>
-									<option value="09">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select> 
-							</div>
-							<div class="col-sm-2">
-								<input type="text" name="birthdd" maxlength="2" class="form-control" placeholder="일" size="4">
+					<div class="mb-3 row">
+						<label class="col-sm-2">생일</label>
+						<div class="col-sm-10">
+						  <div class="row">
+						  	<div class="col-sm-2">
+									<input type="text" name="birthyy" maxlength="4" class="form-control" placeholder="년(4자)" size="6" value="${year}"> 
+								</div>
+								<div class="col-sm-2">
+									<select name="birthmm" class="form-select">
+										<option value="">월</option>
+										<option value="01" ${month eq "01" ? "selected" : ""}>1</option>
+										<option value="02" ${month eq "02" ? "selected" : ""}>2</option>
+										<option value="03" ${month eq "03" ? "selected" : ""}>3</option>
+										<option value="04" ${month eq "04" ? "selected" : ""}>4</option>
+										<option value="05" ${month eq "05" ? "selected" : ""}>5</option>
+										<option value="06" ${month eq "06" ? "selected" : ""}>6</option>
+										<option value="07" ${month eq "07" ? "selected" : ""}>7</option>
+										<option value="08" ${month eq "08" ? "selected" : ""}>8</option>
+										<option value="09" ${month eq "09" ? "selected" : ""}>9</option>
+										<option value="10" ${month eq "10" ? "selected" : ""}>10</option>
+										<option value="11" ${month eq "11" ? "selected" : ""}>11</option>
+										<option value="12" ${month eq "12" ? "selected" : ""}>12</option>
+									</select> 
+								</div>
+								<div class="col-sm-2">
+									<input type="text" name="birthdd" maxlength="2" class="form-control" placeholder="일" size="4" value="${day}">
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">이메일</label>
-					<div class="col-sm-10">
-					  <div class="row">
-							<div class="col-sm-4">
-								<input type="text" name="mail1" maxlength="50" class="form-control" placeholder="email">
-							</div> @
-							<div class="col-sm-3">
-								<select name="mail2" class="form-select">
-									<option value="naver.com">naver.com</option>
-									<option value="daum.net">daum.net</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="nate.com">nate.com</option>
-								</select>
-							</div>
+					<div class="mb-3 row">
+						<label class="col-sm-2">이메일</label>
+						<div class="col-sm-10">
+						  <div class="row">
+								<div class="col-sm-4">
+									<input type="text" name="mail1" maxlength="50" class="form-control" placeholder="email" value="${mail1}">
+								</div> @
+								<div class="col-sm-3">
+									<select name="mail2" class="form-select">
+										<option value="naver.com" ${mail2 eq "naver.com" ? "selected" : ""}>naver.com</option>
+										<option value="daum.net" ${mail2 eq "daum.net" ? "selected" : ""}>daum.net</option>
+										<option value="gmail.com" ${mail2 eq "gmail.com" ? "selected" : ""}>gmail.com</option>
+										<option value="nate.com" ${mail2 eq "nate.com" ? "selected" : ""}>nate.com</option>
+									</select>
+								</div>
+							</div>		
 						</div>		
-					</div>		
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">전화번호</label>
-					<div class="col-sm-3">
-						<input name="phone" type="text" class="form-control" placeholder="phone">
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<label class="col-sm-2">주소</label>
-					<div class="col-sm-5">
-						<input name="address" type="text" class="form-control" placeholder="address">
+					<div class="mb-3 row">
+						<label class="col-sm-2">전화번호</label>
+						<div class="col-sm-3">
+							<input name="phone" type="text" class="form-control" placeholder="phone" value="${row.phone}">
+						</div>
 					</div>
-				</div>
-				<div class="mb-3 row">
-					<div class="col-sm-10">
-						<button type="submit" class="btn btn-primary">등록</button> 
-						<button type="reset" class="btn btn-primary">취소</button>
+					<div class="mb-3 row">
+						<label class="col-sm-2">주소</label>
+						<div class="col-sm-5">
+							<input name="address" type="text" class="form-control" placeholder="address" value="${row.address}">
+						</div>
 					</div>
-				</div>
-			</form>
- 		</div>
+					<div class="mb-3 row">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary">회원수정</button> 
+							<a href="deleteMember.jsp" class="btn btn-primary">회원탈퇴</a>
+						</div>
+					</div>
+				</form>
+	 		</div>
+    </c:if>
  		
    	<%@ include file="../footer.jsp" %>
 	</div>
