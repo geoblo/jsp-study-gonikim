@@ -37,7 +37,7 @@
 			<form action="<c:url value='/BoardListAction.do' />" method="get">
 				<div class="text-end">
 					<span class="badge text-bg-success">
-						전체 ???건
+						전체 ${total_record}건
 					</span>
 				</div>
 	
@@ -50,10 +50,25 @@
 							<th>조회</th>
 							<th>글쓴이</th>
 						</tr>
+						<c:forEach var="board" items="${boardList}">
+							<tr>
+								<td>${board.num}</td>
+								<td>
+									<a href="<c:url value='/BoardViewAction.do?num=${board.num}&pageNum=${pageNum}'/>">
+										${board.subject}
+									</a>
+								</td>
+								<td>${board.registDay}</td>
+								<td>${board.hit}</td>
+								<td>${board.name}</td>
+							</tr>
+						</c:forEach>
 						
-						???
-
-						
+						<c:if test="${empty boardList}">
+							<tr>
+								<td colspan="5">등록된 글이 없습니다.</td>
+							</tr>
+						</c:if>
 					</table>
 				</div>
 	

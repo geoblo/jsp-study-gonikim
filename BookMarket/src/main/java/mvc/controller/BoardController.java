@@ -3,6 +3,7 @@ package mvc.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,6 +30,10 @@ public class BoardController extends HttpServlet {
 		// 아니면 요청 URL 별로 컨트롤러를 여러 개 만들어야 됨
 		if (command.equals("/BoardListAction.do")) { // 등록된 글 목록 페이지 출력하기
 			requestBoardList(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
+			// (참고) MVC 패턴 권장 구조: JSP 직접 접근 차단(WEB-INF 하위는 URL로 접근 불가)
+			// RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+			rd.forward(request, response);
 		}
 		
 		
