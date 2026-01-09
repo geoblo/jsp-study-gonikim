@@ -98,8 +98,26 @@ public class BoardDAO {
 		return list;
 	}
 	
-	
-	
+	// member 테이블에서 로그인된 id의 사용자명 가져오기
+	public String getLoginNameById(String id) {
+		String sql = "SELECT name FROM member WHERE id = ?";
+		
+		try (Connection conn = DBConnection.getConnection();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, id);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("name");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("getLoginNameById() 예외 발생: " + e);
+		}
+		
+		return null;
+	}
 	
 	
 	

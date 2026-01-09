@@ -34,6 +34,9 @@ public class BoardController extends HttpServlet {
 			// (참고) MVC 패턴 권장 구조: JSP 직접 접근 차단(WEB-INF 하위는 URL로 접근 불가)
 			// RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
 			rd.forward(request, response);
+		} else if (command.equals("/BoardWriteForm.do")) { // 글 등록 페이지 출력
+			requestLoginName(request);
+			request.getRequestDispatcher("/board/writeForm.jsp").forward(request, response);
 		}
 		
 		
@@ -70,7 +73,15 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("boardList", boardList);
 	}
 	
-	
+	// 로그인 인증된 사용자명 가져오기
+	private void requestLoginName(HttpServletRequest request) {
+		BoardDAO dao = BoardDAO.getInstance();
+		String id = request.getParameter("id");
+		
+		String name = dao.getLoginNameById(id);
+		
+		request.setAttribute("name", name);
+	}
 	
 	
 	
