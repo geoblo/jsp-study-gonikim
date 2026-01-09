@@ -77,15 +77,25 @@ public class BoardDAO {
 			pstmt.setInt(paramIndex++, limit);
 			pstmt.setInt(paramIndex, offset);
 			
-			try () {
-				
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					BoardDTO board = new BoardDTO();
+					board.setNum(rs.getInt("num"));
+					board.setId(rs.getString("id"));
+					board.setName(rs.getString("name"));
+					board.setSubject(rs.getString("subject"));
+					board.setContent(rs.getString("content"));
+					board.setRegistDay(rs.getString("regist_day"));
+					board.setHit(rs.getInt("hit"));
+					board.setIp(rs.getString("ip"));
+					list.add(board);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("getBoardList() 예외 발생: " + e);
 		}
 		
-		
-		
+		return list;
 	}
 	
 	
