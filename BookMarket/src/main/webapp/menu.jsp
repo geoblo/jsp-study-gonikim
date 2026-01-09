@@ -57,6 +57,9 @@
 				<li class="nav-item">
 					<a href="./editBook.jsp?edit=delete" class="nav-link">도서 삭제</a>
 				</li>
+				<li class="nav-item">
+					<a href="<c:url value='/BoardListAction.do?pageNum=1' />" class="nav-link">게시판</a>
+				</li>				
 			</ul>
 		</div>
 	</div>
