@@ -8,6 +8,6 @@
 </head>
 <body>
 	<p>로그인 성공했습니다.</p>
-	<p>아이디: ${loginInfo.id}</p>
+	<p>아이디: ${sessionScope.loginInfo.id}</p>
 </body>
 </html>

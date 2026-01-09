@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import ch18.com.model.LoginDTO;
 
-@WebServlet("/ch18/ControllerServlet")
-public class ControllerServlet extends HttpServlet {
+@WebServlet("/ch18/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,13 +36,15 @@ public class ControllerServlet extends HttpServlet {
 		// GET요청(조회/화면 출력): 뷰 페이지에 요청 정보를 그대로 전달하고 처음에 요청된 URL을 계속 유지하기 위해 포워딩 방식을 사용
 		// POST요청(등록/수정/삭제): 보통 로그인 후 처리 결과를 보여주는 것이 아니라 새롭게 리다이렉트(PRG 패턴)
 		if (status) {
-			request.setAttribute("loginInfo", loginDTO);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mvc_success.jsp");
-			dispatcher.forward(request, response);
+			// 세션에 로그인 정보 저장
+            request.getSession().setAttribute("loginInfo", loginDTO);
+
+            // PRG 패턴 - 리다이렉트
+            response.sendRedirect(request.getContextPath() + "/ch18/loginSuccess");
 		} else {
 			request.setAttribute("error", "아이디 또는 비밀번호를 확인해 주세요.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("mvc_error.jsp");
-			dispatcher.forward(request, response);			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ch18/mvc_error.jsp");
+			dispatcher.forward(request, response);
 		}
 		
 	}
