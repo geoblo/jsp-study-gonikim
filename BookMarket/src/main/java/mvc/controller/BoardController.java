@@ -44,6 +44,18 @@ public class BoardController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 등록 / 수정 / 삭제
+		
+		String requestURI = request.getRequestURI();
+		String contextPath = request.getContextPath(); // /BookMarket
+		String command = requestURI.substring(contextPath.length());
+		
+		if (command.equals("/BoardWriteAction.do")) { // 새로운 글 등록
+			requestBoardWrite(request);
+			
+			// 글 목록으로 리다이렉트
+			
+		}
 	}
 	
 	// Service 계층: 비즈니스 로직 부분
@@ -83,8 +95,12 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("name", name);
 	}
 	
-	
-	
+	// 새로운 글 등록하기
+	private void requestBoardWrite(HttpServletRequest request) {
+		
+		
+		dao.insertBoard(여기에 BoardDTO 객체 넣기);
+	}
 	
 	
 	
