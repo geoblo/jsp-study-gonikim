@@ -74,7 +74,18 @@
 	
 				<!-- 페이지 네비게이션 -->
 				<div align="center">
-					???
+					<c:forEach var="i" begin="1" end="${total_page}">
+						<a href="<c:url value='/BoardListAction.do?pageNum=${i}' />">
+							<c:choose>
+								<c:when test="${pageNum == i}">
+									<b>[${i}]</b>
+								</c:when>
+								<c:otherwise>
+									[${i}]
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</c:forEach>
 				</div>
 	
 				<div class="py-3" align="right">
