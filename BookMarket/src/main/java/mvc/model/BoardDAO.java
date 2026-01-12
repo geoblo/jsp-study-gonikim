@@ -143,8 +143,39 @@ public class BoardDAO {
 	}
 	
 	// 선택된 글의 조회 수 증가
-	public void updateHit() {
+	public void updateHit(Connection conn, int num) throws SQLException {
+		String sql = "UPDATE board SET hit = hit + 1 WHERE num = ?";
 		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		}
+	}
+	
+	// 선택된 글 상세 내용 가져오기
+	public BoardDTO getBoardByNum(Connection conn, int num) throws SQLException {
+		String sql = "SELECT * FROM board WHERE num = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, num);
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					BoardDTO board = new BoardDTO();
+					board.setNum(rs.getInt("num"));
+					board.setId(rs.getString("id"));
+					board.setName(rs.getString("name"));
+					board.setSubject(rs.getString("subject"));
+					board.setContent(rs.getString("content"));
+					board.setRegistDay(rs.getString("regist_day"));
+					board.setHit(rs.getInt("hit"));
+					board.setIp(rs.getString("ip"));
+					return board;
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	

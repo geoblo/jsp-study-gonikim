@@ -70,7 +70,8 @@ public class BoardController extends HttpServlet {
 		BoardDAO dao = BoardDAO.getInstance();
 		
 		int pageNum = 1; // 현재 페이지 번호
-		if (request.getParameter("pageNum") != null && !request.getParameter("pageNum").isEmpty()) {
+		if (request.getParameter("pageNum") != null && 
+		   !request.getParameter("pageNum").isEmpty()) {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
 		
