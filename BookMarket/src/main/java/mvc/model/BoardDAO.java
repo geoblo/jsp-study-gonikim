@@ -171,6 +171,7 @@ public class BoardDAO {
 					board.setHit(rs.getInt("hit"));
 					board.setIp(rs.getString("ip"));
 					return board;
+//					throw new RuntimeException("특정 게시글 조회 실패"); // 테스트
 				}
 			}
 		}
