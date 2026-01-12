@@ -1,6 +1,8 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mvc.database.DBConnection;
 import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
 
@@ -43,10 +46,12 @@ public class BoardController extends HttpServlet {
 			// 서비스에서 반환된 값을 뷰에 전달(가장 권장되는 구조)
 			BoardDTO board = requestBoardView(request);
 			
+			request.setAttribute("num", request.getParameter("num"));
+			request.setAttribute("page", request.getParameter("pageNum"));
+			request.setAttribute("board", board);
+			
+			request.getRequestDispatcher("/board/view.jsp").forward(request, response);
 		}
-		
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,7 +133,36 @@ public class BoardController extends HttpServlet {
 	// 2. 하나의 Connection을 공유해야 함
 	// 3. autoCommit = false
 	private BoardDTO requestBoardView(HttpServletRequest request) {
+		BoardDAO dao = BoardDAO.getInstance();
 		
+		int num = Integer.parseInt(request.getParameter("num")); // 게시글 번호
+		
+		// 트랜잭션 포맷
+		try (Connection conn = DBConnection.getConnection()) {
+			conn.setAutoCommit(false); // 자동 저장 끄기(트랜잭션 시작)
+			
+			try {
+				// 여러 DB 작업 수행
+				// 1. 게시글 조회
+				BoardDTO board = dao.getBoardByNum(conn, num);
+				if (board == null) {
+					throw new RuntimeException("게시글이 존재하지 않습니다.");
+				}
+				
+				// 2. 조회 수 증가
+				dao.updateHit(conn, num);
+				
+				conn.commit(); // 작업 모두 성공 시 확정(DB에 최종 반영)
+				return board;
+			} catch (Exception e) {
+				conn.rollback(); // 하나라도 예외 발생 시 전부 취소
+				e.printStackTrace();
+				return null;
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	
