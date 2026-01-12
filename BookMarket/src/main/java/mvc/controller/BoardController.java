@@ -56,7 +56,7 @@ public class BoardController extends HttpServlet {
 			requestBoardWrite(request);
 			
 			// 글 목록으로 리다이렉트
-			
+			response.sendRedirect("BoardListAction.do");
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class BoardController extends HttpServlet {
 		BoardDAO dao = BoardDAO.getInstance();
 		
 		int pageNum = 1; // 현재 페이지 번호
-		if (!request.getParameter("pageNum").isEmpty()) {
+		if (request.getParameter("pageNum") != null && !request.getParameter("pageNum").isEmpty()) {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
 		
