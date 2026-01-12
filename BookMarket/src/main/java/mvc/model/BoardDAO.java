@@ -3,6 +3,7 @@ package mvc.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import mvc.database.DBConnection;
@@ -119,7 +120,27 @@ public class BoardDAO {
 		return null;
 	}
 	
-	
+	// board 테이블에 새로운 글 삽입하기
+	public void insertBoard(BoardDTO board) {
+		String sql = "INSERT INTO board (id, name, subject, content, regist_day, hit, ip) "
+				   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
+		try (Connection conn = DBConnection.getConnection();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, board.getId());
+			pstmt.setString(2, board.getName());
+			pstmt.setString(3, board.getSubject());
+			pstmt.setString(4, board.getContent());
+			pstmt.setString(5, board.getRegistDay());
+			pstmt.setInt(6, board.getHit());
+			pstmt.setString(7, board.getIp());
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("insertBoard() 예외 발생: " + e);
+		}
+	}
 	
 	
 	
