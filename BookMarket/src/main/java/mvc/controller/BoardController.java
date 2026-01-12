@@ -1,6 +1,8 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
@@ -97,7 +99,18 @@ public class BoardController extends HttpServlet {
 	
 	// 새로운 글 등록하기
 	private void requestBoardWrite(HttpServletRequest request) {
+		BoardDAO dao = BoardDAO.getInstance();
 		
+		BoardDTO board = new BoardDTO();
+		board.setId(request.getParameter("id"));
+		board.setName(request.getParameter("name"));
+		board.setSubject(request.getParameter("subject"));
+		board.setContent(request.getParameter("content"));
+		board.setHit(0);
+		board.setId(request.getRemoteAddr());
+		
+		String registDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		board.setRegistDay(registDay);
 		
 		dao.insertBoard(여기에 BoardDTO 객체 넣기);
 	}
