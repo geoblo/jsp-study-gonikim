@@ -39,6 +39,10 @@ public class BoardController extends HttpServlet {
 		} else if (command.equals("/BoardWriteForm.do")) { // 글 등록 페이지 출력
 			requestLoginName(request);
 			request.getRequestDispatcher("/board/writeForm.jsp").forward(request, response);
+		} else if (command.equals("/BoardViewAction.do")) { // 선택된 글 상세 페이지 출력
+			// 서비스에서 반환된 값을 뷰에 전달(가장 권장되는 구조)
+			BoardDTO board = requestBoardView(request);
+			
 		}
 		
 		
@@ -114,6 +118,25 @@ public class BoardController extends HttpServlet {
 		
 		dao.insertBoard(board);
 	}
+	
+	// 선택된 글 상세 페이지 가져오기
+	// (중요) 게시글이 정상적으로 조회된 경우에만 조회수를 증가(조회 실패 -> 조회수 증가도 취소)
+	// => 트랜잭션으로 묶기
+	// 1. 트랜잭션 처리는 DAO 내부가 아니라 "서비스 로직"에 위치
+	//    DAO는 트랜잭션을 모름, 단지 주어진 Connection으로 SQL을 실행할 뿐
+	// 2. 하나의 Connection을 공유해야 함
+	// 3. autoCommit = false
+	private BoardDTO requestBoardView(HttpServletRequest request) {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

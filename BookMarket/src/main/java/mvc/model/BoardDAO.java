@@ -142,7 +142,10 @@ public class BoardDAO {
 		}
 	}
 	
-	
+	// 선택된 글의 조회 수 증가
+	public void updateHit() {
+		
+	}
 	
 	
 	
