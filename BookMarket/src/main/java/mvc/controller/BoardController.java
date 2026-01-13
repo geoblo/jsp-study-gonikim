@@ -1,8 +1,6 @@
 package mvc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,8 +11,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mvc.dao.BoardDAO;
-import mvc.database.DBConnection;
 import mvc.dto.BoardDTO;
 import mvc.service.BoardService;
 
