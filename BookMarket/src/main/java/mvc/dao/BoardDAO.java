@@ -1,4 +1,4 @@
-package mvc.model;
+package mvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import mvc.database.DBConnection;
+import mvc.dto.BoardDTO;
 
 public class BoardDAO {
 	// 싱글톤 패턴

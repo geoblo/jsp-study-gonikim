@@ -1,4 +1,4 @@
-package mvc.model;
+package mvc.dto;
 
 // 게시판 데이터 클래스
 public class BoardDTO {
