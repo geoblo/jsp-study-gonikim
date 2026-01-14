@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import mvc.database.DBConnection;
 import mvc.dto.BoardDTO;
 
+// DAO: 순수 JDBC/SQL
 public class BoardDAO {
 	// 싱글톤 패턴
 	private static final BoardDAO instance = new BoardDAO(); 
